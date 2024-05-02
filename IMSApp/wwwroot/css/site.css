@@ -18,6 +18,7 @@ html {
 }
 
 body {
+    position: relative;
     margin-bottom: 60px;
-    min-height: 100%;
+    min-height: 200vh;
 }

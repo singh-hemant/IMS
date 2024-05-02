@@ -12,6 +12,9 @@ namespace IMSApp.Models
         [Required]
         public string Name { get; set; }
 
+        [Required]
+        public string Brand { get; set; }
+
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
@@ -21,6 +24,10 @@ namespace IMSApp.Models
 
         public string Description { get; set; }
 
-        public string imgURL { get; set; }
+        public string? imgURL { get; set; }
+
+        [Required(ErrorMessage = "Stock quantity is required")]
+        [Range(0, int.MaxValue, ErrorMessage = "Stock quantity must be a positive number")]
+        public int StockQuantity { get; set; }
     }
 }

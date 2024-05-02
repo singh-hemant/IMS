@@ -16,6 +16,7 @@ namespace IMSApp.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _env;
 
+
         public ProductsController(ApplicationDbContext context, IWebHostEnvironment env)
         {
             _context = context;
@@ -60,15 +61,17 @@ namespace IMSApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,Name,CategoryId,Price,Description,imgURL")] Product product, [FromForm] IFormFile imgFile)
+        public async Task<IActionResult> Create([Bind("ProductId,Name,Brand,CategoryId,Price,Description,StockQuantity")] Product product, [FromForm] IFormFile imgFile)
         {
             ModelState.Remove("imgURL");
             ModelState.Remove("imgFile");
+            ModelState.Remove("Category");
+           
             if (ModelState.IsValid)
             {
-                Console.WriteLine("Model is valid");
                 if (imgFile != null && imgFile.Length > 0)
                 {
+                    Console.WriteLine("in file");
                     var webRootPath = _env.WebRootPath;
                     var uploadsPath = Path.Combine(webRootPath, "Products");
 
@@ -82,8 +85,9 @@ namespace IMSApp.Controllers
                     {
                         await imgFile.CopyToAsync(fileStream);
                     }
-                    product.imgURL = "/Products/" + imgFile.FileName;
+                    product.imgURL = "/products/" + imgFile.FileName;
                 }
+
                 _context.Add(product);
                 // _context.SaveChanges();
                 await _context.SaveChangesAsync();
@@ -115,15 +119,37 @@ namespace IMSApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,CategoryId,Price,Description,imgURL")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,Brand,CategoryId,Price,Description,StockQuantity")] Product product, [FromForm] IFormFile imgFile)
         {
             if (id != product.ProductId)
             {
                 return NotFound();
             }
 
+            ModelState.Remove("imgURL");
+            ModelState.Remove("imgFile");
+            ModelState.Remove("Category");
+
             if (ModelState.IsValid)
             {
+                if (imgFile != null && imgFile.Length > 0)
+                {
+                    Console.WriteLine("in file");
+                    var webRootPath = _env.WebRootPath;
+                    var uploadsPath = Path.Combine(webRootPath, "Products");
+
+                    if (!Directory.Exists(uploadsPath))
+                    {
+                        Directory.CreateDirectory(uploadsPath);
+                    }
+
+                    var filePath = Path.Combine(uploadsPath, imgFile.FileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await imgFile.CopyToAsync(fileStream);
+                    }
+                    product.imgURL = "/products/" + imgFile.FileName;
+                }
                 try
                 {
                     _context.Update(product);
