@@ -1,0 +1,21 @@
+﻿@model IMSApp.Models.Product
+@{
+    ViewData["Title"] = "PlaceOrderDetails";
+}
+
+<h1>PlaceOrder</h1>
+<h2>Product Details</h2>
+
+<div>
+    <img src="@Url.Content(@Model.imgURL)" alt="Product Image" style="max-width: 200px; max-height: 400px;" />
+
+    <h4>Product Name: @Model.Name</h4>
+    <p>Brand: @Model.Brand</p>
+    <p>Price: @Model.Price</p>
+    <p>Description: @Model.Description</p>
+    <a href="@Url.Action("PlaceOrder", "Home", new { id = @Model.ProductId})" class="btn btn-success">Place Your Order</a>
+
+</div>
+
+
+
