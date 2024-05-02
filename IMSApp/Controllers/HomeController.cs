@@ -18,6 +18,16 @@ namespace IMSApp.Controllers
             return View();
         }
 
+        public IActionResult BuyNow()
+        {
+            return View();
+        }
+
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

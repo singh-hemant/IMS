@@ -1,18 +1,13 @@
 ﻿@model IEnumerable<IMSApp.Models.Product>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "BuyNow";
 }
-<br />
-<br />
-<br />
 
-<h1>List of Items</h1>
-<hr />
-
+<h1>BuyNow</h1>
 
 <p>
-    <a asp-action="Create" class="">Create New</a>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -60,7 +55,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                    <img src="@Url.Content(item.imgURL)" alt="Product Image" style="max-width: 100px; max-height: 100px;" />
+                @Html.DisplayFor(modelItem => item.imgURL)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StockQuantity)
