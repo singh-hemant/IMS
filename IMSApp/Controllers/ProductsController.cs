@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IMSApp.Data;
 using IMSApp.Models;
+using System.Numerics;
 
 namespace IMSApp.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _env;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(ApplicationDbContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: Products
@@ -57,11 +60,32 @@ namespace IMSApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,Name,CategoryId,Price,Description,imgURL")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductId,Name,CategoryId,Price,Description,imgURL")] Product product, [FromForm] IFormFile imgFile)
         {
+            ModelState.Remove("imgURL");
+            ModelState.Remove("imgFile");
             if (ModelState.IsValid)
             {
+                Console.WriteLine("Model is valid");
+                if (imgFile != null && imgFile.Length > 0)
+                {
+                    var webRootPath = _env.WebRootPath;
+                    var uploadsPath = Path.Combine(webRootPath, "Products");
+
+                    if (!Directory.Exists(uploadsPath))
+                    {
+                        Directory.CreateDirectory(uploadsPath);
+                    }
+
+                    var filePath = Path.Combine(uploadsPath, imgFile.FileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await imgFile.CopyToAsync(fileStream);
+                    }
+                    product.imgURL = "/Products/" + imgFile.FileName;
+                }
                 _context.Add(product);
+                // _context.SaveChanges();
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

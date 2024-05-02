@@ -63,7 +63,7 @@
                                     <nav class="main-menu">
                                         <ul class="menu-area-main">
                                             <li> <a  asp-area="" asp-controller="Home" asp-action="Index">Home</a> </li>
-                                            <li> <a  asp-area="" asp-controller="Home" asp-action="About">About</a> </li>
+                                            <li> <a  asp-area="" asp-controller="Products" asp-action="Index">Products</a> </li>
                                             <li><a  asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a></li>
                                             <li><a  asp-area="" asp-controller="Home" asp-action="Index">Privacy</a></li>
                                             
@@ -94,44 +94,12 @@
     </div>
 
   
-    
-    <!-- Javascript files-->
-    <script src="~/js/jquery.min.js"></script>
-    <script src="~/js/popper.min.js"></script>
-    <script src="~/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/jquery-3.0.0.min.js"></script>
-    <script src="~/js/plugin.js"></script>
-    <!-- sidebar -->
-    <script src="~/js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="~/js/custom.js"></script>
-    <!-- javascript -->
-    <script src="~/js/owl.carousel.js"></script>
-    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $(".fancybox").fancybox({
-                openEffect: "none",
-                closeEffect: "none"
-            });
-
-            $(".zoom").hover(function () {
-
-                $(this).addClass('transition');
-            }, function () {
-
-                $(this).removeClass('transition');
-            });
-        });
-    </script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+   
 </body>
 <!-- footer -->
-<footer>
+<footer class="footer">
     
-    <div id="contact" class="footer">
+    <div id="contact" >
         <div class="container">
             <div class="row pdn-top-30">
                 <div class="col-md-12 ">
@@ -163,12 +131,44 @@
                 </div>
             </div>
         </div>
-        <div class="copyright">
+       
             <div class="container">
                 &copy; 2024 - IMSApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
-        </div>
+        
     </div>
 </footer>
 <!-- end footer -->
+<!-- Javascript files-->
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/popper.min.js"></script>
+<script src="~/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/jquery-3.0.0.min.js"></script>
+<script src="~/js/plugin.js"></script>
+<!-- sidebar -->
+<script src="~/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="~/js/custom.js"></script>
+<!-- javascript -->
+<script src="~/js/owl.carousel.js"></script>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".fancybox").fancybox({
+            openEffect: "none",
+            closeEffect: "none"
+        });
+
+        $(".zoom").hover(function () {
+
+            $(this).addClass('transition');
+        }, function () {
+
+            $(this).removeClass('transition');
+        });
+    });
+</script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
 </html>
