@@ -2,12 +2,12 @@
 
 @{
     ViewData["Title"] = "Index";
-    var salesData = ViewBag.SalesByBrandCategoryOrderDate as List<dynamic>;
+    var salesData = ViewBag.SalesByBrandCategoryOrderDate;
 }
 <br /><br />
 <h2 style="color:red;">Sales Data</h2><hr />
 
-<h3 style="color:green;">Total Sales: @ViewBag.TotalSales</h3>
+<h3 style="color:green;">Total Sales Amount: @ViewBag.TotalSales</h3>
 <hr /><br />
 <h4 style="color:red;">Sales Data By Brand, Category, OrderDate</h4>
 
@@ -16,7 +16,7 @@
         <tr>
             <th>Brand</th>
             <th>Category</th>
-            <th>Order Date</th>
+        
             <th>Total Amount</th>
         </tr>
     </thead>
@@ -27,7 +27,7 @@
             <tr>
                 <td>@sale.Brand</td>
                 <td>@sale.Category</td>
-                <td>@sale.OrderDate.ToString("yyyy-MM-dd")</td>
+                
                 <td>@sale.TotalAmount</td>
             </tr>
         }

@@ -31,7 +31,6 @@ namespace IMSApp.Controllers
             {
                 Brand = s.Order.Product.Brand,
                 Category = s.Order.Product.Category.Name,
-                OrderDate = s.Order.OrderDate,
                 TotalAmount = s.TotalAmount
              })
             .ToListAsync();
