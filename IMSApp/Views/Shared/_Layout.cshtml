@@ -67,13 +67,23 @@
                                             <li><a  asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a></li>
                                             <li><a  asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
                                         <li>
+                                            <a class="dropdown-toggle" href="#" id="navbarDropdown2" role="button"
+                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Account
+                                            </a>
+                                            <div class="dropdown-menu custom-dropdown-menu" aria-labelledby="navbarDropdown2">
+                                                <a style="color:red;" asp-controller="Orders" asp-action="Index">My Orders</a>
+                                                <a style="color:red;" asp-controller="Sales" asp-action="Index">Sales Data</a>
+                                            </div>
+                                        </li>
+                                        <li>
                                             <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Edit
                                             </a>
-                                            <div class="dropdown-menu custom-dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a asp-controller="Products" asp-action="Index">Products</a>
-                                                <a asp-controller="Suppliers" asp-action="Index">Suppliers</a>
+                                            <div class="dropdown-menu"  aria-labelledby="navbarDropdown">
+                                                <a style="color:red;" asp-controller="Products" asp-action="Index">Products</a>
+                                                <a style="color:red;" asp-controller="Suppliers" asp-action="Index">Suppliers</a>
                                             </div>
                                         </li>
                                             

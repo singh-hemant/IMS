@@ -1,0 +1,74 @@
+﻿@model IEnumerable<IMSApp.Models.Sale>
+
+@{
+    ViewData["Title"] = "Index";
+    var salesData = ViewBag.SalesByBrandCategoryOrderDate as List<dynamic>;
+}
+<br /><br />
+<h2 style="color:red;">Sales Data</h2><hr />
+
+<h3 style="color:green;">Total Sales: @ViewBag.TotalSales</h3>
+<hr /><br />
+<h4 style="color:red;">Sales Data By Brand, Category, OrderDate</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Order Date</th>
+            <th>Total Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(salesData != null){
+        @foreach (var sale in salesData)
+        {
+            <tr>
+                <td>@sale.Brand</td>
+                <td>@sale.Category</td>
+                <td>@sale.OrderDate.ToString("yyyy-MM-dd")</td>
+                <td>@sale.TotalAmount</td>
+            </tr>
+        }
+        }
+    </tbody>
+</table>
+
+<br /><br />
+
+<h4 style="color:red;">Raw Sales Data</h4>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Order)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaleDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalAmount)
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SaleDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalAmount)
+            </td>
+           
+        </tr>
+}
+    </tbody>
+</table>

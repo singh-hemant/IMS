@@ -68,6 +68,19 @@ namespace IMSApp.Controllers
             _context.Orders.Add(order);
             _context.SaveChanges();
 
+            // Create a new Sale object
+            var sale = new Sale
+            {
+                OrderId = order.OrderId,
+                Order = order,
+                SaleDate = DateTime.Now,
+                TotalAmount = (int)(order.Quantity * product.Price) // Assuming TotalAmount is integer type
+            };
+
+            // Add the sale to the database
+            _context.Sales.Add(sale);
+            _context.SaveChanges();
+
             // Redirect to a confirmation page or any other page
             return RedirectToAction("OrderConfirmation", new { orderId = order.OrderId });
         }

@@ -23,9 +23,7 @@ body {
     min-height: 200vh;
 }
 
-.custom-dropdown-menu {
-    background-color: #fff000;
-}
-.dropdown-menu .dropdown-item {
-    color: red;
+
+.dropdown-item {
+    color: #ff0000;
 }
